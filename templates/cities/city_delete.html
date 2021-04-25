@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Delete City{% endblock %}
+{% block content %}
+
+<h1>Delete city</h1>
+<p>
+{{ object }}
+</p>
+<h3>Are you sure?</h3>
+{% include 'form.html' with button='Delete' %}
+
+
+{% endblock %}
