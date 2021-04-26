@@ -21,5 +21,6 @@ from find_route_.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cities/', include("cities.urls")),
+    path('trains/', include('trains.urls')),
     path('', home, name='home')
 ]

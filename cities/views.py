@@ -58,5 +58,5 @@ class CityDeleteView(SuccessMessageMixin, generic.DeleteView):
 
 class CityListView(generic.ListView):
     model = City
-    paginate_by = 2
+    paginate_by = 5
     template_name = 'cities/home.html'
