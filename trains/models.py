@@ -2,6 +2,7 @@ from cities.models import City
 
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.urls import reverse
 
 
 class Train(models.Model):
@@ -16,6 +17,9 @@ class Train(models.Model):
 
     def __str__(self):
         return f'Train {self.name} from {self.from_city}'
+
+    def get_absolute_url(self):
+        return reverse('trains:train-detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name = 'Train'
