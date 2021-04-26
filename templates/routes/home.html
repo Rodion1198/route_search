@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Route search{% endblock %}
+{% block content %}
+
+<h1>Route search</h1>
+{% url 'find_routes' as action %}
+{% include 'form.html' with button='Search' action=action %}
+
+{% endblock %}
