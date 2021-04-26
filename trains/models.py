@@ -16,7 +16,7 @@ class Train(models.Model):
                                 verbose_name='In city')
 
     def __str__(self):
-        return f'Train {self.name} from {self.from_city}'
+        return f'Train {self.name}| from {self.from_city} to {self.to_city}'
 
     def get_absolute_url(self):
         return reverse('trains:train-detail', kwargs={'pk': self.pk})
