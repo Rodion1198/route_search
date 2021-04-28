@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .forms import RouteForm
 from .utils import get_routes
@@ -25,3 +25,13 @@ def find_routes(request):
         form = RouteForm()
         messages.error(request, 'Not found data for search')
         return render(request, 'routes/home.html', {'form': form})
+
+
+def add_routes(request):
+    if request.method == 'POST':
+        context = {}
+        data = request.POST   # Noqa
+        return render(request, 'routes/create.html', {'form': context})
+    else:
+        messages.error(request, 'Impossible save routes')
+        return redirect('/')

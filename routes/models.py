@@ -3,6 +3,8 @@ from cities.models import City
 from django.db import models
 from django.urls import reverse   # Noqa
 
+from trains.models import Train
+
 
 class Route(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name='Routes name')
@@ -13,7 +15,7 @@ class Route(models.Model):
     to_city = models.ForeignKey(City, on_delete=models.CASCADE,
                                 related_name='route_to_city_set',
                                 verbose_name='In city')
-    trains = models.ManyToManyField('trains.Train', verbose_name='Through cities')
+    trains = models.ManyToManyField(Train, verbose_name='Through cities')
 
     def __str__(self):
         return f'Routes {self.name}| from {self.from_city} to {self.to_city}'
