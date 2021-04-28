@@ -3,7 +3,51 @@
 {% block content %}
 
 <h1>Route search</h1>
+
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            {% if routes %}
+                <h3>Route{% if routes|length != 1 %}s {% endif %}
+                    from {{ cities.from_city }} to {{ cities.to_city }}</h3>
+            <br>
+                {% for route in routes %}
+                    <form action="{% url 'add_routes' %}" method="post"> {% csrf_token %}
+                    <input type="hidden" name="from_city" value="{{ cities.from_city.id }}">
+                    <input type="hidden" name="to_city" value="{{ cities.to_city.id }}">
+                    <input type="hidden" name="total_time" value="{{ cities.total_time }}">
+                    <input type="hidden" name="trains"
+                           value="{% for train in route.trains %} {{ train.id }}, {% endfor %}">
+
+                    <h5>Travel time {{ route.total_time }}</h5>
+                    <table class="table">
+
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">List of trains of this route</th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for train in route.trains %}
+                        <tr>
+                          <th scope="row">{{ forloop.counter }}</th>
+                          <td>{{ train }}</td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </form>
+
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
 {% url 'find_routes' as action %}
 {% include 'form.html' with button='Search' action=action %}
+
+
 
 {% endblock %}
